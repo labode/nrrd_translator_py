@@ -11,8 +11,7 @@ def read_nrrd(file):
 
 
 def read_csv(file_name):
-    data_id = []
-    data_gen = []
+    data = {}
 
     with open(file_name) as csv_file:
         reader = csv.reader(csv_file, delimiter=',')
@@ -22,10 +21,9 @@ def read_csv(file_name):
             value_1 = int(row[1])
             value_2 = int(row[2])
 
-            data_id.append(value_1)
-            data_gen.append(value_2)
+            data[value_1] = value_2
 
-    return [data_id, data_gen]
+    return data
 
 
 def translate(nrrd_file, dimensions, csv_data, vis=False):
@@ -40,11 +38,10 @@ def translate(nrrd_file, dimensions, csv_data, vis=False):
                 if nrrd_file[i, j, k] != 0:
                     # Find corresponding position in csv_data and insert value
                     try:
-                        pos = csv_data[0].index(nrrd_file[i, j, k])
                         if vis:
                             value = 1
                         else:
-                            value = csv_data[1][pos]
+                            value = csv_data[nrrd_file[i, j, k]]
                     except ValueError:
                         # If not found either set 0 for normal operation,
                         # or 2 if we explicitly want to visualize positions of missing measurements in the dataset
