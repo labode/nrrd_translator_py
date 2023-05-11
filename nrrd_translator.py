@@ -59,7 +59,7 @@ def translate(nrrd_file, dimensions, csv_data, vis=False):
 
 def write_nrrd(data, header, target_file):
     # Set filename to write into
-    filename = str(target_file) + ".nrrd"
+    filename = str(target_file)
 
     # write our array into a .nrrd file
     nrrd.write(filename, data, header)
@@ -67,11 +67,10 @@ def write_nrrd(data, header, target_file):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Create mapping from id to generation')
-    parser.add_argument('-i', '--id', action='store', type=str, required=True,
-                        help='.nrrd file containing ids')
-    parser.add_argument('-c', '--csv', action='store', type=str, required=True,
-                        help='.csv file containing id/generation list')
-    parser.add_argument('-f', '--filename', action='store', type=str, required=True, help='Name of output file')
+    parser.add_argument('nrrd_file', action='store', type=str, help='.nrrd file containing ids')
+    parser.add_argument('csv_file', action='store', type=str, help='.csv file containing id/generation list')
+    parser.add_argument('-o', '--output_file', action='store', type=str, required=False, default='results.nrrd',
+                        help='Name of output file')
     parser.add_argument('-m', '--missing', action='store_true', required=False,
                         help='Visualize missing values (no other translation will be performed)')
 
