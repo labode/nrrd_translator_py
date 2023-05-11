@@ -42,7 +42,7 @@ def translate(nrrd_file, dimensions, csv_data, vis=False):
                             value = 1
                         else:
                             value = csv_data[nrrd_file[i, j, k]]
-                    except ValueError:
+                    except (KeyError, ValueError):
                         # If not found either set 0 for normal operation,
                         # or 2 if we explicitly want to visualize positions of missing measurements in the dataset
                         if vis:
@@ -76,9 +76,9 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    nrrd_id_file_path = args.id
-    csv_gen_file_path = args.csv
-    output_filename = args.filename
+    nrrd_id_file_path = args.nrrd_file
+    csv_gen_file_path = args.csv_file
+    output_filename = args.output_file
     visualization = args.missing
 
     print('Reading .nrrd')
