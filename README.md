@@ -14,7 +14,7 @@ Required packages are listed in requirements.txt and can be installed using pip 
 - Optional: Mode flag (-m argument)
 
 ## Output
-- .nrrd containing the euler number
+- .nrrd file labeled according to the supplied specifications
 
 # Usage
 `python3 nrrd_translator.py id.nrrd dictionary.csv -o outputfile.nrrd`
